@@ -1,0 +1,4 @@
+#Sat May 15 13:53:37 WIB 2021
+base.0=/home/BrondoL/FlutterProjects/keyken/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
