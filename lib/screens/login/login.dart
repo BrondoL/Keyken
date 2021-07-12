@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:keyken/components/default_back_btn.dart';
 import 'package:keyken/components/default_button.dart';
+import 'package:keyken/provider/auth_services.dart';
 import 'package:keyken/screens/home/home.dart';
 import 'package:keyken/screens/register/register.dart';
 import 'package:keyken/size_config.dart';
@@ -15,14 +17,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final myController1 = TextEditingController();
-  final myController2 = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    myController1.dispose();
-    myController2.dispose();
+    email.dispose();
+    password.dispose();
     super.dispose();
   }
 
@@ -56,7 +58,7 @@ class _LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: myController1,
+                controller: email,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Email',
@@ -66,7 +68,7 @@ class _LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: myController2,
+                controller: password,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Password',
@@ -80,14 +82,18 @@ class _LoginState extends State<Login> {
               child: SizedBox(
                 width: getProportionateScreenWidth(300),
                 child: DefaultButton(
-                  text: "Masuk",
-                  press: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Home(),
-                    ),
-                  ),
-                ),
+                    text: "Masuk",
+                    press: () async {
+                      await AuthServices.signIn(email.text, password.text);
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        return Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Home(),
+                          ),
+                        );
+                      }
+                    }),
               ),
             ),
           ],

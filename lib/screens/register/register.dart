@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:keyken/components/default_back_btn.dart';
 import 'package:keyken/components/default_button.dart';
+import 'package:keyken/provider/auth_services.dart';
 import 'package:keyken/screens/complete_profile/complete_profile.dart';
 import 'package:keyken/size_config.dart';
 
@@ -14,16 +16,16 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final myController1 = TextEditingController();
-  final myController2 = TextEditingController();
-  final myController3 = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final password2 = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    myController1.dispose();
-    myController2.dispose();
-    myController3.dispose();
+    email.dispose();
+    password.dispose();
+    password2.dispose();
     super.dispose();
   }
 
@@ -63,7 +65,7 @@ class _RegisterState extends State<Register> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: myController1,
+                controller: email,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Email',
@@ -73,7 +75,7 @@ class _RegisterState extends State<Register> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: myController2,
+                controller: password,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Password',
@@ -85,7 +87,7 @@ class _RegisterState extends State<Register> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: myController3,
+                controller: password2,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Konfirmasi Password',
@@ -99,14 +101,18 @@ class _RegisterState extends State<Register> {
               child: SizedBox(
                 width: getProportionateScreenWidth(300),
                 child: DefaultButton(
-                  text: "Daftar",
-                  press: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CompleteProfil(),
-                    ),
-                  ),
-                ),
+                    text: "Daftar",
+                    press: () async {
+                      await AuthServices.signUp(email.text, password.text);
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        return Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CompleteProfil(),
+                          ),
+                        );
+                      }
+                    }),
               ),
             ),
           ],

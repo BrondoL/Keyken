@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keyken/components/custom_buttom_nav_bar.dart';
 import 'package:keyken/enums.dart';
+import 'package:keyken/provider/auth_services.dart';
 import 'package:keyken/screens/login/login.dart';
 
 class Profile extends StatefulWidget {
@@ -147,11 +148,13 @@ class _ProfileState extends State<Profile> {
                 child: RaisedButton(
                   color: Colors.white,
                   splashColor: Colors.grey,
-                  onPressed: () =>
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                    Login.routeName,
-                    (Route<dynamic> route) => false,
-                  ),
+                  onPressed: () async {
+                    await AuthServices.signOut();
+                    return Navigator.of(context).pushNamedAndRemoveUntil(
+                      Login.routeName,
+                      (Route<dynamic> route) => false,
+                    );
+                  },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                     child: Row(

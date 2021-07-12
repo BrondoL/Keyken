@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "776068281876",
+    "project_id": "keyken-59d37",
+    "storage_bucket": "keyken-59d37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776068281876:android:d2cfc5d0fe943555821901",
+        "android_client_info": {
+          "package_name": "com.example.keyken"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776068281876-75e46cvn9viqutm2cbsd6lg4r4kim0bj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjLzbuhKapwAg0dBZTY8gaYNWf-kW4NE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776068281876-75e46cvn9viqutm2cbsd6lg4r4kim0bj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
