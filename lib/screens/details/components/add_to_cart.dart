@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keyken/models/cart.dart' as Carts;
 import 'package:keyken/models/product.dart';
+import 'package:keyken/provider/product_provider.dart';
+import 'package:keyken/screens/cart/cart.dart';
 
 import '../../../constants.dart';
 
@@ -33,7 +36,11 @@ class AddToCart extends StatelessWidget {
                 "assets/icons/add_to_cart.svg",
                 color: kPrimaryColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Carts.demoCarts.add(Carts.Cart(product: product, numOfItem: 1));
+                ProductProvider.addToCart(product.id, 1);
+                return Navigator.pushNamed(context, Cart.routeName);
+              },
             ),
           ),
           Expanded(
@@ -43,7 +50,12 @@ class AddToCart extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18)),
                 color: kPrimaryColor,
-                onPressed: () {},
+                onPressed: () {
+                  Carts.demoCarts
+                      .add(Carts.Cart(product: product, numOfItem: 1));
+                  ProductProvider.addToCart(product.id, 1);
+                  return Navigator.pushNamed(context, Cart.routeName);
+                },
                 child: Text(
                   "Buy  Now".toUpperCase(),
                   style: TextStyle(

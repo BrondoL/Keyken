@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keyken/components/default_button.dart';
+import 'package:keyken/models/cart.dart';
+import 'package:keyken/provider/product_provider.dart';
 import 'package:keyken/screens/home/home.dart';
 import 'package:keyken/screens/success/components/subtitle.dart';
 import 'package:keyken/size_config.dart';
@@ -32,12 +34,16 @@ class _SuccessState extends State<Success> {
               width: getProportionateScreenWidth(300),
               child: DefaultButton(
                 text: "OK",
-                press: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Home(),
-                  ),
-                ),
+                press: () {
+                  demoCarts.clear();
+                  ProductProvider.deleteAllCart();
+                  return Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    ),
+                  );
+                },
               ),
             ),
           ],

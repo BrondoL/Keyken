@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:keyken/constants.dart';
 import 'package:keyken/routes.dart';
 import 'package:keyken/provider/auth_services.dart';
+import 'package:keyken/screens/home/home.dart';
 import 'package:keyken/screens/onboard/onboard.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,9 @@ class MyApp extends StatelessWidget {
               bodyText2: TextStyle(color: kTextColor),
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity),
-        initialRoute: Onboard.routeName,
+        initialRoute: (FirebaseAuth.instance.currentUser == null)
+            ? Onboard.routeName
+            : Home.routeName,
         routes: routes,
       ),
     );

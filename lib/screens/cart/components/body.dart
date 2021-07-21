@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:keyken/models/cart.dart';
+import 'package:keyken/provider/product_provider.dart';
 
 import '../../../size_config.dart';
 import 'cart_card.dart';
@@ -24,6 +25,7 @@ class _BodyState extends State<Body> {
             key: Key(demoCarts[index].product.id.toString()),
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {
+              ProductProvider.deleteCart(demoCarts[index].product.id);
               setState(() {
                 demoCarts.removeAt(index);
               });

@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Hero(
                     tag: product.id.toString(),
-                    child: Image.asset(product.image),
+                    child: Image.network(product.image),
                   ),
                 ),
               ),
